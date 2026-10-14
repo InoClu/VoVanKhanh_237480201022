@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Chuong trinh bat/tat bong den</h2>
+    <img id="bulb" width="120px" src="./bulboff.gif" alt="light">
+    <br><br>
+    <button onclick="toggleLight()">On/Off</button>
+    <script>
+        function toggleLight() {
+            let toggle = document.getElementById("bulb");
+            if (toggle.src.includes("bulboff.gif")) {
+                toggle.src = "bulbon.gif";
+            } else {
+                toggle.src = "bulboff.gif";
+            }
+        }
+    </script>
+
+    <h2>Chuong trinh tinh tuoi</h2>
+    <p>Nhap nam sinh: <input type="int" id="nam"></p>
+    <button onclick="tinhTuoi()">Tinh tuoi</button>
+    <h3>Tuoi: <span id="result"></span></h3>
+    <script>
+        function tinhTuoi() {
+            let namSinh = document.getElementById("nam").value;
+            let today = new Date().getFullYear();
+            let tuoi = today - namSinh;
+            document.getElementById("result").innerText = tuoi;
+            if (isNaN(tuoi) || (document.getElementById("nam").value === "")) {
+                document.getElementById("result").innerText = "nam sinh khong hop le";
+            }
+        }
+    </script>
+
+    <h2>Xem boi</h2>
+    <p>Nhap ten ban: <input type="text" id="ten1"></p>
+    <p>Nhap ten nguoi ay: <input type="text" id="ten2"></p>
+    <button onclick="xemBoi()">Xem ket qua</button>
+    <h3 id="Diem"></h3>
+    <script>
+        function xemBoi() {
+            let ten1 = document.getElementById("ten1").value;
+            let ten2 = document.getElementById("ten2").value;
+            let ketQua = Math.floor(Math.random() * 100) + 1;
+            if(ketQua > 50) {
+                document.getElementById("Diem").innerHTML =
+                ten1 + " ❤ " + ten2 + " Diem: " + ketQua + ". Chuc mung, hai ban rat hop!";
+            } else {
+                document.getElementById("Diem").innerHTML =
+                ten1 + " ❤ " + ten2 + " Diem: " + ketQua + ". Chia tay som bot dau kho";
+            }
+            if (ten1 === "" || ten2 === "") {
+                document.getElementById("Diem").innerText = "Vui long nhap ten";
+            }
+        }
+
+    </script>
+    
+    <h2>Tinh chan/le</h2>
+    <p>Nhap so: <input type="number" id="so"></p>
+    <button onclick="tinhChanLe()">Kiem tra</button>
+    <h3 id="resultChanLe"></h3>
+    <script>
+        function tinhChanLe() {
+            let so = document.getElementById("so").value;
+            if (so === "") {
+                document.getElementById("resultChanLe").innerText = "Vui long nhap so";
+                return;
+            }
+            if (so % 2 === 0) {
+                document.getElementById("resultChanLe").innerText = so + " la so chan";
+            } else {
+                document.getElementById("resultChanLe").innerText = so + " la so le";
+            }
+        }
+    </script>
+
+    <h2>Xep loai hoc luc</h2>
+    <p>Nhap diem: <input type="number" id="diem"></p>
+    <button onclick="xepLoai()">Xep loai</button>
+    <h3 id="resultXepLoai"></h3>
+    <script>
+        function xepLoai() {
+            let diem = document.getElementById("diem").value;
+            if (diem === "") {
+                document.getElementById("resultXepLoai").innerText = "Vui long nhap diem";
+                return;
+            }
+            if (diem < 0 || diem > 100) {
+                document.getElementById("resultXepLoai").innerText = "Vui long nhap diem hop le (0-100)";
+                return;
+            }
+            if (diem >= 90) {
+                document.getElementById("resultXepLoai").innerText = "Xep loai: A";
+            } else if (diem >= 80) {
+                document.getElementById("resultXepLoai").innerText = "Xep loai: B";
+            } else if (diem >= 70) {
+                document.getElementById("resultXepLoai").innerText = "Xep loai: C";
+            } else if (diem >= 60) {
+                document.getElementById("resultXepLoai").innerText = "Xep loai: D";
+            } else {
+                document.getElementById("resultXepLoai").innerText = "Xep loai: F";
+            }
+        }
+    </script>
+
+    <h2>Doan so may man</h2>
+    <p>Nhap so (1-10): <input type="number" id = "soMayMan"></p>
+    <button onclick="kiemTraSoMayMan()">Kiem tra so may man</button>
+    <h3 id="resultSoMayMan"></h3>
+    <script>
+        function kiemTraSoMayMan() {
+            let soMayMan = document.getElementById("soMayMan").value;
+            if (soMayMan < 1 || soMayMan > 10 || soMayMan === "") {
+                document.getElementById("resultSoMayMan").innerHTML = "Vui long nhap so trong khoang (1-10)";
+                return;
+            }
+            let soNgauNhien = Math.floor(Math.random() * 10) + 1;
+            if (soMayMan == soNgauNhien) {
+                document.getElementById("resultSoMayMan").innerHTML = "🍀 Ban da doan dung so may man: " + soNgauNhien;
+            } else {
+                document.getElementById("resultSoMayMan").innerHTML = "😔🥀 So may man la: " + soNgauNhien;
+            }
+        }
+    </script>
+
+    <h2>Oan Tu Ti</h2>
+    <button onclick="playOanTuTi('Bao')">Bao</button>
+    <button onclick="playOanTuTi('Keo')">Keo</button>
+    <button onclick="playOanTuTi('Bua')">Bua</button>
+    <p>Ban da chon: <span id="chonOanTuTi"></span></p>
+    <h3 id="resultOanTuTi"></h3>
+    <script>
+        function playOanTuTi(chon) {
+            document.getElementById("chonOanTuTi").innerHTML = chon;
+            let options = ["Bao", "Keo", "Bua"];
+            let mayTinh = options[Math.floor(Math.random() * options.length)];
+            if (chon === "Bao" && mayTinh === "Bua") {
+                document.getElementById("resultOanTuTi").innerHTML = "🎉 Chuc mung! Ban da thang: " + mayTinh;
+            } else if (chon === "Keo" && mayTinh === "Bao") {
+                document.getElementById("resultOanTuTi").innerHTML = "🎉 Chuc mung! Ban da thang: " + mayTinh;
+            } else if (chon === "Bua" && mayTinh === "Keo") {
+                document.getElementById("resultOanTuTi").innerHTML = "🎉 Chuc mung! Ban da thang: " + mayTinh;
+            } else if (chon === mayTinh) {
+                document.getElementById("resultOanTuTi").innerHTML = "🤝 Hoa! Cung chon: " + mayTinh;
+            } else {
+                document.getElementById("resultOanTuTi").innerHTML = "😢 Khong may! Ban thua: " + mayTinh;
+            }
+        }
+    </script>
+
+    <h2>Xuc xac may man</h2>
+    <button onclick="xucXac()">🎲</button>
+    <h3>Ket qua: <span id="resultXucXac"></span></h3>
+    <script>
+        function xucXac() {
+            let xucXac1 = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("resultXucXac").innerHTML = xucXac1;
+        }
+    </script>
+
+    <h2>Du doan nghe nghiep</h2>
+    <p>Nhap ten: <input type="text" id="ten3"></p>
+    <button onclick="duDoanNgheNghiep()">Du doan</button>
+    <h3 id="resultDuDoanNgheNghiep"></h3>
+    <script>
+        function duDoanNgheNghiep() {
+            let ten = document.getElementById("ten3").value;
+            let ngheNghiep = 
+            ["Lap trinh vien", 
+            "Thiet ke", 
+            "Quan ly du an", 
+            "Chuyen vien marketing", 
+            "Nha van", 
+            "Giao vien", 
+            "Ke toan", 
+            "Y ta", 
+            "Ky su", 
+            "Nha khoa",
+            "Bac si",
+            "Luat su"];
+            let randNgheNghiep = ngheNghiep[Math.floor(Math.random() * ngheNghiep.length)];
+            let ketQua = "Nghe nghiep cua "+ten+" co the la: " + randNgheNghiep;
+            document.getElementById("resultDuDoanNgheNghiep").innerHTML = ketQua;
+            if (ten === "") {
+                document.getElementById("resultDuDoanNgheNghiep").innerHTML = "Vui long nhap ten!";
+            }
+        }
+    </script>
+
+    <h2>Quay thuong may man</h2>
+    <button onclick="quayThuongMayMan()">🎡🎰</button>
+    <h3>Phan thuong: <span id="resultQuayThuongMayMan"></span></h3>
+    <script>
+        function quayThuongMayMan() {
+            let listThuong = 
+            ["5 Ty 💲💲💲",
+            "Iphone 18 Ultra 📱",
+            "Xe may 🏍️",
+            "May tinh 💻",
+            "Tai nghe 🎧",
+            "Loa 🔊",
+            "Smartwatch ⌚",
+            "Chuc ban may man lan sau 😔🥀"
+            ]
+            let phanThuong = Math.floor(Math.random() * listThuong.length);
+            document.getElementById("resultQuayThuongMayMan").innerHTML = listThuong[phanThuong];
+        }
+    </script>
+
+    <h2>May tinh don gian</h2>
+    <p>Nhap so a: <input type="number" id="soA"></p>
+    <p>Nhap so b: <input type="number" id="soB"></p>
+    <button onclick="tinh('tong')">+</button>
+    <button onclick="tinh('hieu')">-</button>
+    <button onclick="tinh('tich')">*</button>
+    <button onclick="tinh('thuong')">/</button>
+    <h3 id="resultTinh"></h3>
+    <script>
+        function tinh(phepTinh) {
+            let a = parseFloat(document.getElementById("soA").value);
+            let b = parseFloat(document.getElementById("soB").value);
+            let ketQua;
+            switch (phepTinh) {
+                case 'tong':
+                    ketQua = a + b;
+                    document.getElementById("resultTinh").innerHTML = "Tong: " + ketQua;
+                    break;
+                case 'hieu':
+                    ketQua = a - b;
+                    document.getElementById("resultTinh").innerHTML = "Hieu: " + ketQua;
+                    break;
+                case 'tich':
+                    ketQua = a * b;
+                    document.getElementById("resultTinh").innerHTML = "Tich: " + ketQua;
+                    break;
+                case 'thuong':
+                    ketQua = a / b;
+                    document.getElementById("resultTinh").innerHTML = "Thuong: " + ketQua;
+                    break;
+                default:
+                    document.getElementById("resultTinh").innerHTML = "Khong hop le!";
+            }
+        }   
+    </script>
+
+    <h2>Kiem tra mat khau</h2>
+    <p>Nhap mat khau: <input type="text" id="matKhau"></p>
+    <button onclick="kiemTraMatKhau()">Kiem tra</button>
+    <h3 id="resultKiemTraMatKhau"></h3>
+    <script>
+        function kiemTraMatKhau() {
+            let matKhau = document.getElementById("matKhau").value;
+            if (matKhau.length < 8) {
+                document.getElementById("resultKiemTraMatKhau").innerHTML = "Mat khau yeu, it nhat 8 ky tu";
+            } else {
+                document.getElementById("resultKiemTraMatKhau").innerHTML = "Mat khau manh!";
+            }
+        }
+    </script>
+
+    <h2>Kiem tra nam nhuan</h2>
+    <p>Nhap nam: <input type="number" id="nam1"></p>
+    <button onclick="kiemTraNamNhuan()">Kiem tra</button>
+    <h3 id="resultKiemTraNamNhuan"></h3>
+    <script>
+        function kiemTraNamNhuan() {
+            let nam = document.getElementById("nam1").value;
+            if ((nam % 4 === 0 && nam % 100 !== 0) || (nam % 400 === 0)) {
+                document.getElementById("resultKiemTraNamNhuan").innerHTML = nam + " la nam nhuan.";
+            } else {
+                document.getElementById("resultKiemTraNamNhuan").innerHTML = nam + " khong la nam nhuan.";
+            }
+        }
+    </script>
+
+    <h2>Chuyen doi nhiet do</h2>
+    <p>Nhap nhiet do °C: <input type="number" id="nhietDoC"></p>
+    <button onclick="chuyenDoiNhietDo()">Chuyen doi</button>
+    <h3 id="resultChuyenDoiNhietDo"></h3>
+    <script>
+        function chuyenDoiNhietDo() {
+            let nhietDoC = document.getElementById("nhietDoC").value;
+            let nhietDoF = (nhietDoC * 9/5) + 32;
+            document.getElementById("resultChuyenDoiNhietDo").innerHTML = nhietDoC + "°C = " + nhietDoF + "°F";
+        }
+    </script>
+
+    <h2>Tinh BMI</h2>
+    <p>Nhap chieu cao (m): <input type="number" id="chieuCao"></p>
+    <p>Nhap can nang (kg): <input type="number" id="canNang"></p>
+    <button onclick="tinhBMI()">Tinh BMI</button>
+    <h3 id="resultBMI"></h3>
+    <script>
+        function tinhBMI() {
+            let chieuCao = parseFloat(document.getElementById("chieuCao").value);
+            let canNang = parseFloat(document.getElementById("canNang").value);
+            let bmi = canNang / (chieuCao * chieuCao);
+            document.getElementById("resultBMI").innerHTML = "BMI: " + bmi.toFixed(2);
+            if (bmi < 18.5) {
+                document.getElementById("resultBMI").innerHTML += " (Gay)";
+            } else if (bmi < 24.9) {
+                document.getElementById("resultBMI").innerHTML += " (Binh thuong)";
+            } else if (bmi < 29.9) {
+                document.getElementById("resultBMI").innerHTML += " (Thua can)";
+            } else {
+                document.getElementById("resultBMI").innerHTML += " (Beo phi)";
+            }
+        }
+    </script>
+
+</body>
+</html>
